@@ -1,0 +1,62 @@
+﻿# SalatTrack — Current Status
+
+## Current State
+- Solution: `SalatTrack.UI`, `SalatTrack.BLL`, `SalatTrack.DAL`, `SalatTrack.Models` on `.NET 8`.
+- App is partially working, but there are still UI flow and stability issues.
+- Biggest visible issue remains: `Could not load cities: Object reference not set to an instance of an object.`
+
+## What Is Already Done
+- `LoginForm` and `RegisterForm` are wired up.
+- Register city loading was changed to `Items.Add()` instead of `DataSource` for `DarkComboBox`.
+- `LoadCities()` was moved to run after form show to reduce control-init issues.
+- `DBHelper` now has safer connection-string handling.
+- Several forms have close/exit handling to reduce locked DLL problems during development.
+- DAL repositories already have CRUD methods.
+- `SettingsForm` saves settings.
+- `LogsForm` can read and add logs.
+- `MainForm` loads prayer times and uses a timer.
+
+## What Still Needs Work
+1. Fix the remaining city-load null reference completely.
+2. Clean up shutdown flow so the app exits gracefully.
+3. Make startup/database config handling more reliable.
+4. Ensure all DAL code consistently disposes `SqlConnection`, `SqlCommand`, and `SqlDataReader`.
+5. Finish UI-side CRUD flows where they are missing.
+6. Improve logging/diagnostics.
+
+## CRUD Status
+### DAL
+CRUD is already implemented in the repositories:
+- `UserRepository`
+- `CityRepository`
+- `PrayerTimeRepository`
+- `NotificationSettingsRepository`
+- `LogRepository`
+
+### UI
+- `Create`: mostly done.
+- `Read`: mostly done.
+- `Update`: partially done, mainly in settings.
+- `Delete`: still missing in the UI.
+
+## According to `plan.txt`, the smooth-flow priorities are
+- Fix custom control stability.
+- Centralize app shutdown.
+- Add startup DB checks.
+- Add missing UI CRUD screens/actions.
+- Keep BLL/DAL/UI separation clean.
+
+## Good Extra Features to Add
+- `TasbeehCounterForm`
+- Qibla direction helper
+- Monthly prayer calendar
+- Hijri events / Islamic dates page
+- Export logs to CSV
+- Search/filter logs
+- Theme switcher
+- Prayer reminder test button
+- Ramadan mode
+- Better dashboard cards
+
+## Best Next Step
+Finish the missing UI update/delete actions, then add one standout feature like `TasbeehCounterForm` or a monthly prayer calendar.
